@@ -62,4 +62,13 @@ Adapted from a university data visualization coursework project to demonstrate i
 
 ## Screenshots
 
-To add screenshots, run the included **synthetic demo version** and capture the Dashboard and Instructor Explorer tabs. Do not upload screenshots from the coursework version if they reveal real instructor identities or internal data.
+These screenshots were generated automatically from the **synthetic public demo**, not the coursework dataset.
+
+### Dashboard
+
+![Interactive dashboard with department performance, yearly trends, evaluation categories, and response rates](screenshots/dashboard.png)
+
+### Instructor Explorer
+
+![Instructor Explorer showing synthetic instructor evaluation comparisons](screenshots/instructor-explorer.png)
+
