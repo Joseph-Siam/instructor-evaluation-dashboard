@@ -1,0 +1,62 @@
+name: Capture portfolio screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.py'
+      - 'requirements.txt'
+      - 'sample_instructor_evaluations.csv'
+      - 'scripts/capture_screenshots.py'
+      - '.github/workflows/capture-screenshots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install app and screenshot dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Launch synthetic dashboard
+        run: |
+          python -m streamlit run app.py --server.headless true --server.port 8501 > /tmp/streamlit.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8501/_stcore/health > /dev/null; then
+              echo "Streamlit is running"
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/streamlit.log
+          exit 1
+
+      - name: Capture dashboard and instructor screenshots
+        run: python scripts/capture_screenshots.py
+
+      - name: Commit screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add screenshots/dashboard.png screenshots/instructor-explorer.png
+          if git diff --cached --quiet; then
+            echo "Screenshots are unchanged."
+          else
+            git commit -m "Update portfolio screenshots from synthetic demo"
+            git push
+          fi
