@@ -1,0 +1,18 @@
+# Virtual environments
+.venv/
+venv/
+# Python cache
+__pycache__/
+*.py[cod]
+# Streamlit secrets and local settings
+.streamlit/secrets.toml
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+# Original private coursework data and submission files
+Wk08_dataset.xlsx
+*.zip
+AI_PROMPTS_LOG.md
+# Local exports
+filtered_instructor_evaluations.csv
