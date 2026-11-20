@@ -11,7 +11,7 @@ OUT.mkdir(exist_ok=True)
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, args=["--no-sandbox"])
-    page = browser.new_page(viewport={"width": 1600, "height": 1050}, device_scale_factor=1)
+    page = browser.new_page(viewport={"width": 1600, "height": 1800}, device_scale_factor=1, color_scheme="dark")
     page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
     page.get_by_text("Overall department performance", exact=False).first.wait_for(timeout=60000)
     page.wait_for_timeout(4500)
