@@ -4,6 +4,12 @@ An interactive dashboard built with **Python, Streamlit, pandas, and Plotly** to
 
 > **Data privacy:** This public portfolio version uses **fully synthetic demonstration data**. All instructor labels, scores, subjects, and enrollment figures are fictional and do not represent real individuals or university results.
 
+## Live demo
+
+**[Launch the interactive Instructor Evaluation Dashboard](https://joseph-instructor-dashboard.streamlit.app/)**
+
+This hosted application uses **synthetic demonstration data** and includes filters for academic year, department, semester, instructor, evaluation measure, and minimum enrollment.
+
 ## Features
 
 - **Interactive filters:** Academic year, department, semester, instructor, evaluation measure, and minimum class enrollment.
